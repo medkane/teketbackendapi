@@ -15,6 +15,15 @@ class CreateCotisationsTable extends Migration
     {
         Schema::create('cotisations', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('titre');
+            $table->dateTime('date');
+            $table->integer('montant');
+            $table->string('reference');
+            $table->string('source');
+            $table->string('messageSource');
+
+            $table->integer('campagne_id')->unsigned()->index();
+            $table->foreign('campagne_id')->references(('id'))->on('campagnes')->onDelete('cascade');
             $table->timestamps();
         });
     }
