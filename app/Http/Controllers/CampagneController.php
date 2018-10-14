@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Campagne;
 use App\Http\Resources\Campagne\CampagneResource;
+use App\Http\Resources\Campagne\CampagneCollection;
 use Illuminate\Http\Request;
 
 class CampagneController extends Controller
@@ -15,7 +16,7 @@ class CampagneController extends Controller
      */
     public function index()
     {
-        return Campagne::all();
+        return CampagneCollection::collection(Campagne::all());
     }
 
     /**

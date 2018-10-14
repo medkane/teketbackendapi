@@ -19,8 +19,14 @@ class CampagneResource extends JsonResource
             'titre' => $this->titre,
             'type' => $this->type,
             'shortDescription' => $this->shortDescription,
+            'longDescription' => $this->longDescription,
             'dateDebut' => $this->dateDebut,
-            'dateFin' => $this->dateFin
+            'dateFin' => $this->dateFin,
+            'nombreParticipants'=> $this->cotisations->count(),
+            'montantCollecte'=> $this->cotisations->sum('montant'),           
+            'href' =>[
+                'cotisations' => route('cotisations.index',$this->id)
+            ]
         ];
     }
 }

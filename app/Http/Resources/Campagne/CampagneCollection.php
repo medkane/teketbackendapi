@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources\Campagne;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class CampagneCollection extends ResourceCollection
+class CampagneCollection extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -14,6 +14,16 @@ class CampagneCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'titre' => $this->titre,
+            'type' => $this->type,
+            'shortDescription' => $this->shortDescription,
+            'nombreParticipants'=> $this->cotisations->count(),
+            'montantCollecte'=> $this->cotisations->sum('montant'),           
+            'href' =>[
+                'link' => route('campagnes.show',$this->id)
+            ]
+        ];
     }
 }
