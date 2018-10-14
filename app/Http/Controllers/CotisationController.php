@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\models\Cotisation;
+use App\models\Campagne;
 use Illuminate\Http\Request;
+use App\Http\Resources\Cotisation\CotisationResource;
 
 class CotisationController extends Controller
 {
@@ -12,9 +14,9 @@ class CotisationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Campagne $campagne)
     {
-        //
+        return CotisationResource::collection($campagne->cotisations) ;
     }
 
     /**

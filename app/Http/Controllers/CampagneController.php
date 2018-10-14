@@ -16,7 +16,7 @@ class CampagneController extends Controller
      */
     public function index()
     {
-        return CampagneCollection::collection(Campagne::all());
+        return CampagneCollection::collection(Campagne::paginate(5));
     }
 
     /**

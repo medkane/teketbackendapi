@@ -10,7 +10,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource('/campagnes','CampagneController');
 
-Route::group(['prefix'=>'camoagnes'], function(){
+Route::group(['prefix'=>'campagnes'], function(){
 
     Route::apiResource('/{campagne}/cotisations','CotisationController');
 
