@@ -16,6 +16,7 @@ class CreateCampagnesTable extends Migration
         Schema::create('campagnes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('titre');
+            $table->integer('type');
             $table->string('shortDescription');
             $table->longText('longDescription');
             $table->dateTime('dateDebut');
