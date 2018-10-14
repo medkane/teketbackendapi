@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\Campagne;
+use App\Http\Resources\Campagne\CampagneResource;
 use Illuminate\Http\Request;
 
 class CampagneController extends Controller
@@ -14,7 +15,7 @@ class CampagneController extends Controller
      */
     public function index()
     {
-        //
+        return Campagne::all();
     }
 
     /**
@@ -46,7 +47,7 @@ class CampagneController extends Controller
      */
     public function show(Campagne $campagne)
     {
-        //
+        return new CampagneResource($campagne);
     }
 
     /**
