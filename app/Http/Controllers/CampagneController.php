@@ -102,6 +102,7 @@ class CampagneController extends Controller
      */
     public function destroy(Campagne $campagne)
     {
-        //
+        $campagne->delete();
+        return response(null, Response::HTTP_NO_CONTENT) ;
     }
 }
