@@ -6,6 +6,8 @@ use App\models\Campagne;
 use App\Http\Resources\Campagne\CampagneResource;
 use App\Http\Resources\Campagne\CampagneCollection;
 use Illuminate\Http\Request;
+use App\Http\Requests\CampagneRequest;
+use Symfony\Component\HttpFoundation\Response;
 
 class CampagneController extends Controller
 {
@@ -14,6 +16,11 @@ class CampagneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index','show');
+    }
     public function index()
     {
         return CampagneCollection::collection(Campagne::paginate(5));
@@ -35,9 +42,19 @@ class CampagneController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CampagneRequest $request)
     {
-        //
+        $campagne = new Campagne;
+        $campagne->titre = $request->titre;
+        $campagne->type = $request->type;
+        $campagne->shortDescription = $request->shortDescription;
+        $campagne->longDescription = $request->longDescription;
+        $campagne->dateDebut = $request->dateDebut;
+        $campagne->dateFin = $request->dateFin;
+        $campagne->save();
+        return response([
+            'data' => new CampagneResource($campagne)
+        ], Response::HTTP_CREATED) ;
     }
 
     /**
