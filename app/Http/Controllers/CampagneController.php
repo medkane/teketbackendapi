@@ -88,7 +88,10 @@ class CampagneController extends Controller
      */
     public function update(Request $request, Campagne $campagne)
     {
-        //
+        $campagne->update($request->all());
+        return response([
+            'data' => new CampagneResource($campagne)
+        ], Response::HTTP_CREATED) ;
     }
 
     /**
