@@ -6,6 +6,8 @@ use App\models\Cotisation;
 use App\models\Campagne;
 use Illuminate\Http\Request;
 use App\Http\Resources\Cotisation\CotisationResource;
+use App\Http\Requests\CotisationRequest;
+use Symfony\Component\HttpFoundation\Response;
 
 class CotisationController extends Controller
 {
@@ -35,9 +37,13 @@ class CotisationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CotisationRequest $request, Campagne $campagne)
     {
-        //
+        $cotisation = new Cotisation($request->all());
+        $campagne->cotisations()->save($cotisation);
+        return response([
+            'data' => new CotisationResource($cotisation)
+        ], Response::HTTP_CREATED) ;
     }
 
     /**
