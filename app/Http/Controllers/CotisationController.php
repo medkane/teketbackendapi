@@ -52,9 +52,9 @@ class CotisationController extends Controller
      * @param  \App\models\Cotisation  $cotisation
      * @return \Illuminate\Http\Response
      */
-    public function show(Cotisation $cotisation)
+    public function show( Campagne $campagne, Cotisation $cotisation)
     {
-        //
+        return new CotisationResource($cotisation);
     }
 
     /**
@@ -75,9 +75,12 @@ class CotisationController extends Controller
      * @param  \App\models\Cotisation  $cotisation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cotisation $cotisation)
+    public function update(Request $request, Campagne $campagne, Cotisation $cotisation)
     {
-        //
+        $cotisation->update($request->all());
+        return response([
+            'data' => new CotisationResource($cotisation)
+        ], Response::HTTP_CREATED) ;
     }
 
     /**
@@ -86,8 +89,9 @@ class CotisationController extends Controller
      * @param  \App\models\Cotisation  $cotisation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cotisation $cotisation)
+    public function destroy(Campagne $campagne, Cotisation $cotisation)
     {
-        //
+        $cotisation->delete();
+        return response(null, Response::HTTP_NO_CONTENT) ;
     }
 }
